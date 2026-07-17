@@ -1,0 +1,3 @@
+# Informational top-level tool pin. This is intentionally not a transitive
+# hash lock; CI installs the same exact version without --require-hashes.
+platformio==6.1.19

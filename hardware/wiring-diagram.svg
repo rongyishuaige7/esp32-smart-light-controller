@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="770" viewBox="0 0 1200 770" role="img" aria-labelledby="title desc">
+  <title id="title">基于ESP32的多路智能照明控制系统：源码推导接线边界图</title>
+  <desc id="desc">展示ESP32到四路低压LED驱动级与可选BH1750的源码接口。不是原理图、PCB或已验证实物接线。</desc>
+  <style>
+    text { font-family: Arial, "Noto Sans SC", sans-serif; fill: #172033; }
+    .title { font-size: 27px; font-weight: 700; }
+    .sub { font-size: 16px; fill: #4b5a70; }
+    .box { fill: #ffffff; stroke: #2f5f8f; stroke-width: 2; rx: 14; }
+    .warn { fill: #fff6df; stroke: #bb6c00; stroke-width: 2; rx: 12; }
+    .chip { fill: #e9f4ff; stroke: #2878b5; stroke-width: 2; rx: 14; }
+    .line { fill: none; stroke: #2878b5; stroke-width: 3; marker-end: url(#arrow); }
+    .power { fill: none; stroke: #ba6b00; stroke-width: 3; stroke-dasharray: 8 6; marker-end: url(#arrowWarn); }
+    .label { font-size: 17px; font-weight: 700; }
+    .small { font-size: 15px; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2878b5"/></marker>
+    <marker id="arrowWarn" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#ba6b00"/></marker>
+  </defs>
+  <rect width="1200" height="770" fill="#f7fafc"/>
+  <text x="60" y="55" class="title">基于ESP32的多路智能照明控制系统</text>
+  <text x="60" y="84" class="sub">源码推导接口图 · 非原理图 / PCB / 实物接线证明 · 接线前必须断电并核对电压、电流、极性和共地</text>
+
+  <rect x="75" y="190" width="330" height="350" class="chip"/>
+  <text x="105" y="235" class="label">ESP32（esp32dev）</text>
+  <text x="105" y="275" class="small">GPIO25 → LED 通道 1 逻辑输出</text>
+  <text x="105" y="310" class="small">GPIO26 → LED 通道 2 逻辑输出</text>
+  <text x="105" y="345" class="small">GPIO23 → LED 通道 3 逻辑输出</text>
+  <text x="105" y="380" class="small">GPIO19 → LED 通道 4 逻辑输出</text>
+  <text x="105" y="425" class="small">GPIO21 → I²C SDA（可选 BH1750）</text>
+  <text x="105" y="460" class="small">GPIO22 → I²C SCL（可选 BH1750）</text>
+  <text x="105" y="505" class="small">GPIO 是 3.3 V 逻辑，不是功率电源</text>
+
+  <rect x="770" y="155" width="350" height="205" class="warn"/>
+  <text x="800" y="200" class="label">四路低压 LED 负载</text>
+  <text x="800" y="238" class="small">GPIO25 / GPIO26 / GPIO23 / GPIO19</text>
+  <text x="800" y="270" class="small">每一路应经已核对的限流 / 驱动级</text>
+  <text x="800" y="302" class="small">需确认极性、负载电流、供电与公共地</text>
+  <text x="800" y="334" class="small">不得直接推断可接市电 / 继电器 / 大功率负载</text>
+
+  <rect x="770" y="465" width="350" height="145" class="box"/>
+  <text x="800" y="510" class="label">可选 BH1750</text>
+  <text x="800" y="548" class="small">SDA GPIO21 · SCL GPIO22</text>
+  <text x="800" y="578" class="small">地址 / 上拉 / 电压 / 读数待实物确认</text>
+
+  <path d="M405 290 C560 290,620 245,770 245" class="line"/>
+  <text x="500" y="250" class="small">四路逻辑控制</text>
+  <path d="M405 443 C560 443,620 525,770 525" class="line"/>
+  <text x="505" y="495" class="small">I²C</text>
+  <path d="M605 680 C705 625,745 350,770 325" class="power"/>
+  <text x="475" y="710" class="small">受控低压外部电源（按实物选型）</text>
+
+  <rect x="75" y="635" width="1045" height="77" class="warn"/>
+  <text x="100" y="670" class="label">安全边界：</text>
+  <text x="100" y="697" class="small">当前公开固件开机默认先写低电平；真实上电 / 驱动极性仍由电路决定。仅限隔离可信局域网与低压教学负载，不用于市电、公共 / 应急照明、安防或无人值守。</text>
+</svg>

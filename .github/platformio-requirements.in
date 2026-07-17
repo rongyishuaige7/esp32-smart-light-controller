@@ -1,0 +1,4 @@
+## CI installs this exact top-level tool without --require-hashes because a
+## one-line hash file cannot truthfully lock PlatformIO's transitive Python
+## dependencies. See .github/workflows/validate.yml.
+platformio==6.1.19

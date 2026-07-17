@@ -1,0 +1,41 @@
+# PlatformIO and embedded build outputs
+.pio/
+.pioenvs/
+.piolibdeps/
+*.bin
+*.elf
+*.map
+*.o
+*.a
+
+# IDE and operating-system state
+.vscode/
+.idea/
+.vs/
+*.code-workspace
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+
+# Local captures, credentials and release bundles must never enter this repository.
+.env
+firmware/src/wifi_credentials.h
+*.log
+*.pcap
+*.pem
+*.key
+*.p12
+*.jks
+*.zip
+*.7z
+*.tar
+*.gz
+*.apk
+*.aab
+*.mp4
+*.mov
+*.avi
+*.mkv
