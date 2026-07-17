@@ -37,7 +37,6 @@ GlobalConfig globalConfig;
 bool sensorAvailable = false;
 bool autoModeLastOutput = false;
 bool autoModeHasOutput = false;
-bool httpStarted = false;
 unsigned long lastAutoSensorPoll = 0;
 
 void updateLed(const size_t index) {
@@ -171,19 +170,27 @@ void handleStatus(AsyncWebServerRequest *request) {
 
 bool getExactInteger(JsonObject document, const char *name, int &value) {
   JsonVariant field = document[name];
-  if (!field.is<int>()) {
+  if (!field.is<JsonInteger>()) {
     return false;
   }
-  value = field.as<int>();
+  const JsonInteger parsed = field.as<JsonInteger>();
+  if (parsed < INT_MIN || parsed > INT_MAX) {
+    return false;
+  }
+  value = static_cast<int>(parsed);
   return true;
 }
 
 bool getExactUnsigned(JsonObject document, const char *name, uint32_t &value) {
   JsonVariant field = document[name];
-  if (!field.is<uint32_t>()) {
+  if (!field.is<JsonInteger>()) {
     return false;
   }
-  value = field.as<uint32_t>();
+  const JsonInteger parsed = field.as<JsonInteger>();
+  if (parsed < 0 || static_cast<uint64_t>(parsed) > UINT32_MAX) {
+    return false;
+  }
+  value = static_cast<uint32_t>(parsed);
   return true;
 }
 
@@ -309,7 +316,6 @@ void setupWebServer() {
     sendResult(request, 404, "not_found");
   });
   server.begin();
-  httpStarted = true;
 }
 
 void connectTrustedLocalNetwork() {
@@ -327,7 +333,7 @@ void connectTrustedLocalNetwork() {
     setupWebServer();
     Serial.println("[WiFi] connected; local HTTP service started");
   } else {
-    WiFi.disconnect(true, true);
+    WiFi.disconnect(false, false);
     WiFi.mode(WIFI_OFF);
     Serial.println("[WiFi] connection unavailable; HTTP service remains disabled");
   }

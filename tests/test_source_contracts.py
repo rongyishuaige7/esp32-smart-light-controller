@@ -65,6 +65,8 @@ class SourceContracts(unittest.TestCase):
         self.assertIn('if (WIFI_SSID[0] == \'\\0\')', main)
         self.assertIn('WiFi.mode(WIFI_STA)', main)
         self.assertIn('WiFi.mode(WIFI_OFF)', main)
+        self.assertIn('WiFi.disconnect(false, false)', main)
+        self.assertNotIn('WiFi.disconnect(true, true)', main)
         self.assertIn('setupWebServer();', main)
         self.assertIn('#define WIFI_SSID ""', example)
         self.assertIn('#define WIFI_PASSWORD ""', example)

@@ -12,7 +12,7 @@
 | LED 通道 3 | GPIO23 | `LED_PINS[2]` | 同上。 |
 | LED 通道 4 | GPIO19 | `LED_PINS[3]` | 同上。 |
 | 可选 BH1750 | SDA=GPIO21，SCL=GPIO22 | `Wire.begin(I2C_SDA_PIN, I2C_SCL_PIN)`；初始化失败/读数失败时 API 明确返回 `unavailable`，自动模式不改变输出 | 精确模块、电压、I²C 地址、上拉、电平、线长、读数范围与校准。 |
-| 可选本机局域网连接 | `wifi_credentials.h`（Git 忽略） | 仅在本机提供可信网络凭据且成功连接后，服务才监听 HTTP 80；公开默认不会启用网络服务 | 凭据文件、连接、重连、HTTP、接入点安全性与本地 IP 均未按当前公开提交复测。 |
+| 可选本机局域网连接 | `wifi_credentials.h`（Git 忽略） | 仅在本机提供可信网络凭据且成功连接后，服务才监听 HTTP 80；无凭据时 Wi‑Fi 关闭且 HTTP 不监听 | 凭据文件、连接、重连、HTTP、接入点安全性与本地 IP 均未按当前公开提交复测。 |
 
 ## 源码推导接线边界
 
