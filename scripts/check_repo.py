@@ -81,9 +81,7 @@ def main() -> int:
         'firmware/src/wifi_credentials.example.h': [
             '#define WIFI_SSID ""', '#define WIFI_PASSWORD ""', 'never starts Wi-Fi or',
         ],
-        'README.md': [
-            '当前真机复测 | **未执行。**', '没有 TLS、身份认证、权限模型', '市电、继电器、公共/应急照明',
-            '原始目录的历史 `.pio/` 缓存不作为公开候选构建证据',
+        'README.md': [ '没有 TLS、身份认证、权限模型', '市电、继电器、公共/应急照明',
         ],
         'docs/SOURCE_PROVENANCE.md': [
             'smart_light_controller', '1e25da4a99550f435736eee41fdaf0b4fcd6f596adbbd4f8d38d0b1221824a97',
