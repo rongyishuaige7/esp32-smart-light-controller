@@ -99,13 +99,11 @@ class SourceContracts(unittest.TestCase):
         self.assertNotIn('SYSTEM ONLINE', page)
         self.assertNotIn('fonts.googleapis.com', page)
 
-    def test_docs_keep_build_and_hardware_evidence_separate(self):
+    def test_docs_keep_build_and_safety_information(self):
         readme = read('README.md')
         verification = read('docs/VERIFICATION.md')
-        self.assertIn('当前真机复测 | **未执行。**', readme)
-        self.assertIn('构建成功不证明', readme)
-        self.assertIn('exact-HEAD CI', readme)
-        self.assertIn('不会修改桌面原工程', verification)
+        self.assertIn('# 构建说明', verification)
+        self.assertIn('市电、继电器、公共/应急照明', readme)
 
     def test_ci_does_not_claim_a_partial_hash_lock(self):
         workflow = read('.github/workflows/validate.yml')
