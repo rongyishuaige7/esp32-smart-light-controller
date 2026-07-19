@@ -1,7 +1,5 @@
 # 基于ESP32的多路智能照明控制系统
 
-> **教学原型 / 历史项目。** 基于 ESP32、四路低压 LED、可选 BH1750 与可选本地 HTTP 页面的多路照明控制参考。
-
 它演示四路手动 GPIO 控制、五种倒计时选项，以及基于可选光照输入的四路联动自动逻辑。它不是市电照明、智能家居成品、网络安全设备、可靠远程控制系统或可直接长期部署的产品。
 
 ## 功能范围
@@ -37,7 +35,7 @@
 
 请先断电接线，并确认低压电源、公共地、每路 LED 极性、限流/恒流驱动和最大电流。ESP32 GPIO 只是 3.3 V 逻辑输出，不能替代功率电源或直接驱动未知/大电流负载。不得把本项目用于市电、继电器、公共/应急照明、安防、消防、医疗、生产控制或无人值守场景。
 
-## 可选网络与本地控制边界
+## 可选网络与本地控制
 
 公开默认固件的 `wifi_credentials.example.h` 是空值：不会创建接入点、不会进行配网，也不会启动 Wi‑Fi 或 HTTP。需要复现实验时，复制该文件为 Git 忽略的 `firmware/src/wifi_credentials.h`，只填入自己**可信本地测试网络**的凭据；仅在连接成功后，HTTP 服务才监听设备所在局域网的端口 `80`。不要提交、截图、回显或分享该本机文件。
 
@@ -56,15 +54,11 @@ cd firmware
 pio run
 ```
 
-固定构建目标：PlatformIO Core `6.1.19`、`espressif32@6.13.0`、`esp32dev`。依赖版本已在 `firmware/platformio.ini` 固定。首次发布前以本仓实际 `scripts/verify.sh` 和最终 GitHub Actions exact-HEAD 结果为准；不要引用原始工程 `.pio/` 缓存作为本仓构建证据。
-
 ### 一键门禁
 
 ```bash
 bash scripts/verify.sh
 ```
-
-脚本会导出候选到临时目录，运行敏感信息/结构检查、无硬件源码契约与 PlatformIO 构建。它不会修改原工程、烧录硬件、连接真实 Wi‑Fi、写入真实凭据、清除 NVS 或证明真机行为。
 
 ## 许可证、第三方与学习使用
 
@@ -76,7 +70,6 @@ bash scripts/verify.sh
 ## 更多资料
 
 - [硬件与接线边界](HARDWARE.md)
--
 - [来源与权威副本裁决](docs/SOURCE_PROVENANCE.md)
 - [本地 HTTP 协议](docs/PROTOCOL.md)
 - [验证说明](docs/VERIFICATION.md)
